@@ -19,34 +19,34 @@ import { useState } from "react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
 import { Link } from "react-router-dom";
-import { useCategory } from "../../hooks";
+import { useItemsCollection } from "../../hooks";
+// import {createProductsFirestore} from "../../helpers/index";
 
 
 export const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [contador, setContador] = useState(0);
-  const { category } = useCategory();
+  const { items } = useItemsCollection('categories');
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-evenly"}>
-          <Link style={{ fontWeight: "bold", fontSize: "2vw", marginRight: "2vw" }}to="/">ShopShop</Link>
-          {/* Agregando routing a otras paginas */}
-          <Link to="/" style={{ fontWeight: "bold", fontSize: "2vw" }}>Home</Link>
+          <Link style={{ fontWeight: "bolder", fontSize: "2vw", marginRight: "2vw" }}to="/">ShopShop</Link>
 
           <Menu>
             <MenuButton as={Link} cursor="pointer" style={{ marginLeft: 30 }}>
               Categorias
             </MenuButton>
             <MenuList height={"300px"} overflowY={"scroll"}>
-              {category.map((category) => (
+              {items.map((category) => (
                 <MenuItem key={category.slug}>
                   <Link to={`/category/${category.slug}`}>{category.name}</Link>
                 </MenuItem>
               ))}
             </MenuList>
           </Menu>
-        
+
+          {/* <Button onClick={() => createProductsFirestore("products")}>Agregar productos a firebase</Button> */}
         
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>

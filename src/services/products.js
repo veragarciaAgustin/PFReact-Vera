@@ -25,7 +25,3 @@ export async function getProductByCategory(category){
     //Ejemplo con AXIOS
     return await axios.get(`https://dummyjson.com/products/category/${category}`)
 }
-
-export async function getCategories() {
-    return await axios.get("https://dummyjson.com/products/categories");
-  }

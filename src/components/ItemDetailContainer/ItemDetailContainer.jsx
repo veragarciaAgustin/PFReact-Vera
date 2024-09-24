@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import {  useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
 import {
   Box,
   Container,
@@ -13,8 +14,8 @@ import {
   StackDivider,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { CartContext } from "../../context/CartContext";
-export const ItemDetailContainer = ({ product }) => {
+import { SkeletonItem } from "../SkeletonItem/SkeletonItem";
+export const ItemDetailContainer = ({ product, loading }) => {
   const [showCount, setShowCount] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -40,7 +41,7 @@ export const ItemDetailContainer = ({ product }) => {
     }
   };
 
-  return (
+  return loading ? <SkeletonItem/> : (
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}

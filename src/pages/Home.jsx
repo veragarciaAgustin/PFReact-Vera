@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import { ItemListContainer} from "../components";
 import { ChakraProvider, Flex, Spinner, Box, Menu } from "@chakra-ui/react";
 //Importo el custom hook useProducts para poder usarlo en otras paginas
-import { useProducts } from "../hooks";
-//Importo el custom hook useProductsById para poder usarlo en otras paginas
-import { useProductsById } from "../hooks";
+import { useItemsCollection } from "../hooks";
+
 
 
 
@@ -16,7 +15,7 @@ export const Home = () => {
   //Aqui aplico el customHook, useProducts para realizar la logica de traida de productos
   //y poder usarlo en otras paginas de ser necesario
   //Traemos como OBJETO, la informacion que retornamos desde el customHook
-  const { productsData, loading, error } = useProducts();
+  const { items, loading, error } = useItemsCollection("products");
 
     return (
         <ChakraProvider>
@@ -39,7 +38,7 @@ export const Home = () => {
               <p>Hay un error durante la carga de los productos.</p>
             </Box>
           ) :
-          <ItemListContainer products={productsData} />
+          <ItemListContainer products={items} />
         )}
         </ChakraProvider>
     )

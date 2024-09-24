@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Flex, Spinner } from "@chakra-ui/react";
 export const Category = () => {
     const { category } = useParams();
-    const { productsData, loading } = useProductsByCategory(category);
+    const { products, loading } = useProductsByCategory(category);
 
 
     return loading ? (
@@ -18,7 +18,7 @@ export const Category = () => {
           <Spinner size={"xl"} />
         </Flex>
       ) : (
-        <ItemListContainer products={productsData} />
+        <ItemListContainer products={products} />
       )
 }
 
