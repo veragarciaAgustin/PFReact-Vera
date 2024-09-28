@@ -7,7 +7,6 @@ export const Category = () => {
     const { category } = useParams();
     const { products, loading } = useProductsByCategory(category);
 
-
     return loading ? (
         <Flex
           width={"100vw"}

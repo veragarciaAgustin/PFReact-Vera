@@ -1,4 +1,4 @@
-import {  useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import {
   Box,
@@ -15,6 +15,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { SkeletonItem } from "../SkeletonItem/SkeletonItem";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const ItemDetailContainer = ({ product, loading }) => {
   const [showCount, setShowCount] = useState(false);
   const [count, setCount] = useState(0);
@@ -30,6 +34,16 @@ export const ItemDetailContainer = ({ product, loading }) => {
       const newCount = count + 1;
       setCount(newCount);
       addItem(product, newCount);
+      toast(`Se agrego ${product.title} al carrito`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -38,10 +52,22 @@ export const ItemDetailContainer = ({ product, loading }) => {
       const newCount = count - 1;
       setCount(newCount);
       removeItem(product);
+      toast.warning(`Se quito ${product.title} del carrito`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
-  return loading ? <SkeletonItem/> : (
+  return loading ? (
+    <SkeletonItem />
+  ) : (
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
@@ -70,10 +96,36 @@ export const ItemDetailContainer = ({ product, loading }) => {
             </Heading>
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
+              fontWeight={600}
+              fontSize={"2xl"}
+              marginTop={"1rem"}
+            >
+              {product.brand}
+            </Text>
+            <Text
+              color={useColorModeValue("gray.900", "gray.400")}
+              fontWeight={300}
+              fontSize={"2xl"}
+              marginTop={"1rem"}
+            >
+              ${product.price} USD
+            </Text>
+            <Text
+              color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={300}
               fontSize={"2xl"}
             >
-              ${product.price} USD
+              {product.availabilityStatus}
+            </Text>
+            <Text
+              color={useColorModeValue("gray.900", "gray.400")}
+              fontWeight={300}
+              fontSize={"2xl"}
+              marginTop={"1rem"}
+            >
+              <h1>Dimensions</h1>
+              {product.dimensions.width} x {product.dimensions.height} x{" "}
+              {product.dimensions.depth}
             </Text>
           </Box>
 
@@ -116,6 +168,7 @@ export const ItemDetailContainer = ({ product, loading }) => {
           </Button>
           {showCount && (
             <Stack direction="row" spacing={4} align="center" mt={4}>
+              <ToastContainer />
               <Button onClick={handleDecrement}>-</Button>
               <Text fontSize="lg">{count}</Text>
               <Button onClick={handleIncrement}>+</Button>

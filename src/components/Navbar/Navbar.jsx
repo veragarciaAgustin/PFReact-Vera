@@ -2,20 +2,17 @@ import {
   Box,
   Flex,
   Avatar,
-  //Text,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuDivider,
-  //useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
 import { Link } from "react-router-dom";
@@ -25,7 +22,6 @@ import { useItemsCollection } from "../../hooks";
 
 export const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [contador, setContador] = useState(0);
   const { items } = useItemsCollection('categories');
   return (
     <>
@@ -34,7 +30,14 @@ export const Navbar = () => {
           <Link style={{ fontWeight: "bolder", fontSize: "2vw", marginRight: "2vw" }}to="/">ShopShop</Link>
 
           <Menu>
-            <MenuButton as={Link} cursor="pointer" style={{ marginLeft: 30 }}>
+            <MenuButton as={Link} cursor="pointer" style={{ marginLeft: 30, 
+              fontWeight:"bolder", 
+              fontSize:"1.5vw",
+              borderRadius: "5px", 
+              border: "5px solid #2D3748",
+              backgroundColor: useColorModeValue("gray.100", "gray.900"),
+              padding: "5px",
+              marginRight: "2vw" }}>
               Categorias
             </MenuButton>
             <MenuList height={"300px"} overflowY={"scroll"}>

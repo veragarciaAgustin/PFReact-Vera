@@ -1,8 +1,6 @@
 import {
-  Flex,
   Box,
   Image,
-  Button,
   ButtonGroup,
   CardFooter,
   Divider,
@@ -16,36 +14,30 @@ import {
 import { Link } from "react-router-dom";
 
 export const ItemListContainer = ({ products }) => {
-  // const categories = products.map((product) => product.category);
-  // Set es una estructura de datos que no permite duplicados
-  // const uniqueCategories = [...new Set(categories)];
-  // console.log(uniqueCategories)
-
   return (
-    <Box display={"flex"} flexWrap={"wrap"}>
+    <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"}>
       {products.map((product) => (
-        <Card key={product.id} maxW="sm" margin={"1rem"}>
+        <Card key={product.id} maxW="sm" margin={"2rem"}>
           <CardBody>
             <Image
               src={product.thumbnail}
               alt={product.name}
               borderRadius="lg"
+              width="100%"
+              height="auto"
             />
             <Stack mt="6" spacing="3">
-              <Heading size="md">{product.title}</Heading>
+              <Heading size="md" fontWeight="bold">{product.title}</Heading>
               <Text>{product.description}</Text>
-              <Text color="blue.600" fontSize="2xl">
-                {product.price}
+              <Text color="grey.600" fontSize="2xl">
+                ${product.price} USD
               </Text>
             </Stack>
           </CardBody>
           <Divider />
           <CardFooter>
             <ButtonGroup spacing="2">
-              {/* <Button variant="ghost" colorScheme="blue">
-                Add to cart
-              </Button> */}
-              <Link to={`/item/${product.id}`}>
+              <Link to={`/item/${product.id}`} style={{ textDecoration: "none", fontWeight: "bold", fontSize: "1vw", borderRadius: "5px", border: "5px solid #4A5899", padding: "5px" }}>
                 {" "}
                 Ir a detalle del producto{" "}
               </Link>

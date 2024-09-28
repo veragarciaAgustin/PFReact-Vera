@@ -4,6 +4,10 @@ import React from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { CartContext } from "../context/CartContext";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 export const Payment = () => {
   const [name, setName] = React.useState("");
@@ -34,12 +38,17 @@ export const Payment = () => {
     const ordersCollection = collection(db, "orders");
 
     addDoc(ordersCollection, orderObj).then(({ id }) => {
-      alert(`Orden creada con el ID: ${id}`);
+      MySwal.fire({
+        title: "¡Orden creada!",
+        html: `Tu orden con id <b>${id}</b> ha sido creada`,
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
     });
   };
 
   return (
-    <Flex>
+    <Flex display={"block"}>
       <Input
         type="text"
         placeholder="Nombre"

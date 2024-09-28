@@ -26,7 +26,6 @@ export const CartDetails = () => {
     0
   );
 
-
   const handleDeleteItem = (item) => {
     deleteItem(item);
   };
